@@ -19,7 +19,7 @@ void test_debouncer_init ()
     uint8_t pins_repeated[] = {1,2,3,4,5,6,7,7};
     TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_ERROR_DUPLICATED, debouncer_init(pins_repeated, sizeof(pins_repeated)));
     
-    //if button nu,ber is too big then return error.
+    //if button number is too big then return error.
     uint8_t pins_out_of_range[] = {1,2,3,4,157,6};
     TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_ERROR_PIN_OUT_OF_RANGE, debouncer_init(pins_out_of_range, sizeof(pins_out_of_range)));
     
@@ -65,7 +65,7 @@ void test_debouncer_states()
     TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_STATE_HIGH, debouncer_get_state(33));
 
     debouncer_update(); //5
-    TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_STATE_FALLING, debouncer_get_state(33));
+    TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_STATE_FALLING, debouncer_get_edge(33));
     
     debouncer_update(); //5
     TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_STATE_LOW, debouncer_get_state(33));
@@ -85,9 +85,9 @@ void test_debouncer_states()
     TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_STATE_LOW, debouncer_get_state(33));
 
     debouncer_update(); //5
-    TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_STATE_RISING, debouncer_get_state(33));
+    TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_STATE_RISING, debouncer_get_edge(33));
     
-    debouncer_update(); //6
+   // debouncer_update(); //6
     TEST_ASSERT_EQUAL_UINT8(DEBOUNCER_STATE_HIGH, debouncer_get_state(33));
 }
 int main()

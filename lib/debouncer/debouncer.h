@@ -32,4 +32,6 @@ void debouncer_update();
  * @return uint8_t returns statusof the pin of error codes.
  */
 uint8_t debouncer_get_state(uint8_t pin);
+uint8_t debouncer_get_edge(uint8_t pin);
+
 #endif
